@@ -1,3 +1,4 @@
+#include <Arduino.h>
 // ==========================================
 // Sistema de Acionamento Automático de Farol (2 LEDs)
 // ==========================================

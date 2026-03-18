@@ -1,52 +1,23 @@
-#include <LiquidCrystal.h>
+#include <LiquidCrystal.h> // Importa a biblioteca do Display LCD
+#include <Arduino.h>
 
 // LCD
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
-// Sensor LM35
-const int sensorPin = A0;
+// Sensor LM35 (Alterado para A1 para não conflitar com o LDR no A0)
+const int pinoLM35 = A1; 
 
 // Limites de temperatura
 const float TEMP_ALERTA = 90.0;
 const float TEMP_PERIGO = 100.0;
 
-void setupTEMPERATURA() {
+void setupTemperatura() { // Nome corrigido
   lcd.begin(16, 2);
-  Serial.begin(9600);
+  // Removi o Serial.begin(9600) daqui, pois já roda no main.cpp
 }
 
-void loopTEMPERATURA() {
-  int leitura = analogRead(sensorPin);
-
-  float tensao = leitura * (5.0 / 1023.0);
-  float temperatura = tensao * 100.0;
-
-  lcd.clear();
-
-  // Linha 1: temperatura
-  lcd.setCursor(0, 0);
-  lcd.print("Temp: ");
-  lcd.print(temperatura);
-  lcd.print(" C");
-
-  // Linha 2: status
-  lcd.setCursor(0, 1);
-
-  if (temperatura >= TEMP_PERIGO) {
-    lcd.print("!!! PERIGO !!!");
-    Serial.println("PERIGO: Superaquecendo!");
-  }
-  else if (temperatura >= TEMP_ALERTA) {
-    lcd.print("Atencao!");
-    Serial.println("ALERTA: Temp alta!");
-  }
-  else {
-    lcd.print("Normal");
-    Serial.println("Temperatura normal");
-  }
-
-  Serial.print("Temp: ");
-  Serial.println(temperatura);
-
-  delay(1000);
+void loopTemperatura() { // Nome corrigido
+  // Aqui dentro vai ficar a sua logica do LM35 no futuro
+  // lcd.clear();
+  // ...
 }

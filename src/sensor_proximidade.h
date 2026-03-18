@@ -8,7 +8,7 @@ const int ledPin = 13;    // LED da placa
 int pirState = LOW;       
 int sensorValue = 0;      
 
-void setup() {
+void setupproximidade() {
   pinMode(ledPin, OUTPUT);  
   pinMode(pirPin, INPUT);   
   
@@ -16,7 +16,7 @@ void setup() {
   Serial.println("Sistema ativado. Mexa a bolinha DENTRO da area de alcance do sensor.");
 }
 
-void loop() {
+void loopproximidade() {
   // O sensor branco so sabe dizer HIGH (tem movimento na area) ou LOW (nao tem)
   sensorValue = digitalRead(pirPin);  
 
