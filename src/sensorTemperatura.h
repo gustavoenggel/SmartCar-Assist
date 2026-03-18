@@ -10,12 +10,12 @@ const int sensorPin = A0;
 const float TEMP_ALERTA = 90.0;
 const float TEMP_PERIGO = 100.0;
 
-void setup() {
+void setupTEMPERATURA() {
   lcd.begin(16, 2);
   Serial.begin(9600);
 }
 
-void loop() {
+void loopTEMPERATURA() {
   int leitura = analogRead(sensorPin);
 
   float tensao = leitura * (5.0 / 1023.0);
