@@ -8,9 +8,8 @@ const int pinoFarol1 = 2;     // Pino digital conectado ao primeiro LED/Relé
 const int pinoFarol2 = 4;     // Pino digital conectado ao segundo LED/Relé
 const int limiteEscuro = 400; // Limite de luz (ajuste conforme a iluminação do ambiente)
 
-void setup() {
-  // 2. Configuração inicial
-  Serial.begin(9600);          // Inicia a comunicação serial para monitoramento
+void setupLDR() {
+  // 2. Configuração inicial        
   pinMode(pinoLDR, INPUT);     // Configura o pino do LDR como entrada
   pinMode(pinoFarol1, OUTPUT); // Configura o pino do primeiro farol como saída
   pinMode(pinoFarol2, OUTPUT); // Configura o pino do segundo farol como saída
@@ -20,7 +19,7 @@ void setup() {
   digitalWrite(pinoFarol2, LOW); 
 }
 
-void loop() {
+void loopLDR() {
   // 3. Leitura do Sensor
   int nivelLuz = analogRead(pinoLDR);
   

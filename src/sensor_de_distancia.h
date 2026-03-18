@@ -8,15 +8,15 @@ const int pinoBuzzer = 8; // Pino onde ligamos o Buzzer
 long tempo;
 int distancia;
 
-void setup() {
+void setupDISTANCIA() {
   pinMode(pinoTrig, OUTPUT);
   pinMode(pinoEcho, INPUT);
   pinMode(pinoBuzzer, OUTPUT); // Define o buzzer como saída de som
   
-  Serial.begin(9600);
+ 
 }
 
-void loop() {
+void loopDISTANCIA() {
   // 1. Envia o pulso de som (grito do sensor)
   digitalWrite(pinoTrig, LOW);
   delayMicroseconds(2);
