@@ -1,13 +1,24 @@
+<<<<<<< HEAD
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
+=======
+#include <LiquidCrystal.h> // Importa a biblioteca do Display LCD
+#include <Arduino.h>
+>>>>>>> 46ac52165eeb597b0ec632e5f9ba9b32065cf5ef
 
 const int SENSOR = A5;
 
+<<<<<<< HEAD
 // Inicializa o LCD no endereço 0x27
 LiquidCrystal_I2C lcd(0x27, 16, 2);
+=======
+// Sensor LM35 (Alterado para A1 para não conflitar com o LDR no A0)
+const int pinoLM35 = A1; 
+>>>>>>> 46ac52165eeb597b0ec632e5f9ba9b32065cf5ef
 
 float temperatura;
 
+<<<<<<< HEAD
 void setup() {
   lcd.init();
   lcd.backlight();
@@ -44,4 +55,15 @@ void loop() {
   }
 
   delay(1000);
+=======
+void setupTemperatura() { // Nome corrigido
+  lcd.begin(16, 2);
+  // Removi o Serial.begin(9600) daqui, pois já roda no main.cpp
+}
+
+void loopTemperatura() { // Nome corrigido
+  // Aqui dentro vai ficar a sua logica do LM35 no futuro
+  // lcd.clear();
+  // ...
+>>>>>>> 46ac52165eeb597b0ec632e5f9ba9b32065cf5ef
 }

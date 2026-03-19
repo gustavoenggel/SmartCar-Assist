@@ -35,19 +35,22 @@ void loopDISTANCIA() {
 
   // 3. Lógica do Apito (Sensor de Ré)
   // Se a distância for maior que 0 e menor ou igual a 30 cm...
-  if (distancia > 0 && distancia <= 30) {
-    
-    tone(pinoBuzzer, 1000); // Liga o apito (frequência de 1000 Hz)
+  if (distancia > 0 && distancia < 10) {
+    tone(pinoBuzzer, 2000); // Frequência mais alta (aguda) para dar sensação de perigo
+    delay(30);              // Bip bem curtinho
+    noTone(pinoBuzzer);
+    delay(40);              // Pausa super rápida para ele apitar freneticamente
+  } 
+  // Condição 2: DISTÂNCIA MÉDIA (Entre 10 e 30 cm)
+  else if (distancia >= 10 && distancia <= 30) {
+    tone(pinoBuzzer, 1000); // Frequência normal
     delay(50);              // Deixa apitando por 50 milissegundos
     noTone(pinoBuzzer);     // Desliga o apito
     
-    // O pulo do gato: o tempo que ele fica em silêncio antes do 
-    // próximo "bip" depende da distância! 
-    // Se a distância for 30cm, espera 300ms. Se for 5cm, espera só 50ms.
+    // O pulo do gato: o tempo que ele fica em silêncio diminui conforme aproxima
     delay(distancia * 10); 
-    
   } 
-  // Se a distância for maior que 30 cm (sem perigo) ou 0 (erro de leitura)
+  // Condição 3: LONGE OU ERRO (Maior que 30 cm ou 0)
   else {
     noTone(pinoBuzzer); // Garante que o buzzer fique em silêncio
     delay(100);         // Espera um pouquinho antes de ler de novo

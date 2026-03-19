@@ -14,6 +14,10 @@ void setup() {
   // 2. Chamando as configurações de cada sensor
   setupLDR();
   setupTemperatura();
+  setupDISTANCIA();
+  setupproximidade();
+
+
   // setupDistancia();  // (Descomente se tiver criado essa função no .h)
   // setupProximidade(); // (Descomente se tiver criado essa função no .h)
 }
@@ -22,6 +26,9 @@ void loop() {
   // 3. Executando a lógica de cada sensor continuamente
   loopLDR();
   loopTemperatura();
+  loopDISTANCIA();
+  loopproximidade();
+
   // loopDistancia();
   // loopProximidade();
 
