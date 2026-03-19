@@ -1,52 +1,47 @@
-#include <LiquidCrystal.h>
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
 
-// LCD
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+const int SENSOR = A5;
 
-// Sensor LM35
-const int sensorPin = A0;
+// Inicializa o LCD no endereço 0x27
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-// Limites de temperatura
-const float TEMP_ALERTA = 90.0;
-const float TEMP_PERIGO = 100.0;
+float temperatura;
 
-void setupTEMPERATURA() {
-  lcd.begin(16, 2);
-  Serial.begin(9600);
+void setup() {
+  lcd.init();
+  lcd.backlight();
+  
+  pinMode(SENSOR, INPUT);
 }
 
-void loopTEMPERATURA() {
-  int leitura = analogRead(sensorPin);
+void loop() {
+  int valor = analogRead(SENSOR);
 
-  float tensao = leitura * (5.0 / 1023.0);
-  float temperatura = tensao * 100.0;
+  // Converter leitura para temperatura (LM35)
+  // 5.0V / 1023 passos * 100 para converter os 10mV/°C do LM35
+  temperatura = (valor * 5.0 / 1023.0) * 30.0;
 
   lcd.clear();
 
-  // Linha 1: temperatura
+  // Primeira linha: Exibe o valor numérico
   lcd.setCursor(0, 0);
   lcd.print("Temp: ");
-  lcd.print(temperatura);
+  lcd.print(temperatura, 1); // Exibe com 1 casa decimal
   lcd.print(" C");
 
-  // Linha 2: status
+  // Segunda linha: Exibe o status baseado nos novos limites
   lcd.setCursor(0, 1);
 
-  if (temperatura >= TEMP_PERIGO) {
-    lcd.print("!!! PERIGO !!!");
-    Serial.println("PERIGO: Superaquecendo!");
-  }
-  else if (temperatura >= TEMP_ALERTA) {
-    lcd.print("Atencao!");
-    Serial.println("ALERTA: Temp alta!");
-  }
+  if (temperatura <= 90) {
+    lcd.print("Status: Normal");
+  } 
+  else if (temperatura > 90 && temperatura <= 100) {
+    lcd.print("Status: ATENCAO");
+  } 
   else {
-    lcd.print("Normal");
-    Serial.println("Temperatura normal");
+    lcd.print("ALERTA PERIGO!");
   }
-
-  Serial.print("Temp: ");
-  Serial.println(temperatura);
 
   delay(1000);
 }
