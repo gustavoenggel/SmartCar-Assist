@@ -30,7 +30,7 @@ void loopTemperatura() {
   lcd.print(temperatura, 1); // Exibe com 1 casa decimal
   lcd.print(" C");
 
-  // Segunda linha: Exibe o status baseado nos novos limites
+  // Segunda linha: Exibe o status baseado nos novos limites.
   lcd.setCursor(0, 1);
 
   if (temperatura <= 90) {
