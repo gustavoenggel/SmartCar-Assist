@@ -1,4 +1,4 @@
-#include <Arduino.h> // Obrigatório no PlatformIO
+#include <Arduino.h> 
 
 // 1. Incluindo todos os seus arquivos de sensores
 #include "sensorLDR.h"

@@ -8,14 +8,14 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 float temperatura;
 
-void setup() {
+void setupTemperatura() {
   lcd.init();
   lcd.backlight();
   
   pinMode(SENSOR, INPUT);
 }
 
-void loop() {
+void loopTemperatura() {
   int valor = analogRead(SENSOR);
 
   // Converter leitura para temperatura (LM35)
