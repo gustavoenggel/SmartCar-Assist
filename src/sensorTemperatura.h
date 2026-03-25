@@ -1,6 +1,7 @@
-#include <Adafruit_LiquidCrystal.h>
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
 
-Adafruit_LiquidCrystal lcd_1(0);
+LiquidCrystal_I2C lcd_1(0x27, 16, 2);
 
 // Pino do sensor
 const int sensorTemp = A0;
@@ -9,10 +10,11 @@ const int sensorTemp = A0;
 const float TEMP_NORMAL_MAX = 90.0;
 const float TEMP_ALERTA_MAX = 105.0;
 
-void setupTemperatura()
-{
-  lcd_1.begin(16, 2);
-  lcd_1.setBacklight(1);
+void setupTemperatura() {
+  // Inicializa o display LCD via I2C
+  lcd_1.init();
+  // Liga a luz de fundo do display
+  lcd_1.backlight();
 
   Serial.begin(9600);
 }
