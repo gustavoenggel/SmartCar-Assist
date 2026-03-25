@@ -27,31 +27,30 @@ void loopDISTANCIA() {
   // 2. Calcula o tempo e a distância
   tempo = pulseIn(pinoEcho, HIGH);
   distancia = tempo * 0.034 / 2;
-
-  // Mostra no monitor serial para você acompanhar
   Serial.print("Distancia: ");
   Serial.print(distancia);
   Serial.println(" cm");
 
-  // 3. Lógica do Apito (Sensor de Ré)
-  // Se a distância for maior que 0 e menor ou igual a 30 cm...
-  if (distancia > 0 && distancia < 10) {
-    tone(pinoBuzzer, 2000); 
-    delay(30);              
-    noTone(pinoBuzzer);
-    delay(40);             
+  /// 3. Lógica do Apito (Sensor de Ré)
+  
+  // Condição 1: MUITO PERTO (Batida iminente: menor ou igual a 10 cm)
+  if (distancia > 0 && distancia <= 10) {
+    
+    tone(pinoBuzzer, 1500); 
+    delay(50); // Apenas um pequeno atraso para estabilizar o ciclo do loop
   } 
-  // Condição 2: DISTÂNCIA MÉDIA (Entre 10 e 30 cm)
-  else if (distancia >= 10 && distancia <= 30) {
-    tone(pinoBuzzer, 1000); 
-    delay(50);              
+  
+  // Condição 2: DISTÂNCIA DE APROXIMAÇÃO (Entre 10 e 30 cm)
+  else if (distancia > 10 && distancia <= 30) {
+    tone(pinoBuzzer, 1500); 
+    delay(80);             
     noTone(pinoBuzzer);     
     
-    delay(distancia * 10); 
+    delay(distancia * 15); 
   } 
-  // Condição 3: LONGE OU ERRO (Maior que 30 cm ou 0)
+ 
   else {
-    noTone(pinoBuzzer); // Garante que o buzzer fique em silêncio
-    delay(100);         
+    noTone(pinoBuzzer); 
+    delay(50);          
   }
 }

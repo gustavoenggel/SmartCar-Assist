@@ -1,4 +1,4 @@
-int LDR = A0;          // pino do LDR
+int LDR = A2;          // pino do LDR
 int farol1 = 2;        // LED 1 (farol esquerdo)
 int farol2 = 4;        // LED 2 (farol direito)
 int valorLDR = 0;      
